@@ -30,7 +30,7 @@ public class UserService {
 	}
 	
 	public User insert(User obj) {
-		return repository.save(obj);
+		return repository.insert(obj);
 	}
 	
 	public void delete(String id) {
@@ -40,6 +40,17 @@ public class UserService {
 	
 	public User fromDTO(UserDTO obj) {
 		return new User(obj.getId(),obj.getName(),obj.getEmail());
+	}
+	
+	public void update(User obj) {
+		User objRet = findById(obj.getId());
+		dataUpdate(obj,objRet);
+		repository.save(objRet);
+	}
+
+	private void dataUpdate(User obj, User objRet) {
+		objRet.setName(obj.getName());
+		objRet.setEmail(obj.getEmail());
 	}
 	
 }
