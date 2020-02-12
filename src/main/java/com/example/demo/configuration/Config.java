@@ -1,6 +1,7 @@
 package com.example.demo.configuration;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TimeZone;
 
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import com.example.demo.domain.Post;
 import com.example.demo.domain.User;
 import com.example.demo.dto.AuthorDTO;
+import com.example.demo.dto.CommentDTO;
 import com.example.demo.repositories.PostRepository;
 import com.example.demo.repositories.UserRepository;
 @Configuration
@@ -39,6 +41,13 @@ public class Config implements CommandLineRunner{
 		
 		Post p1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para Recife, abraços", new AuthorDTO(maria));
 		Post p2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei fez hoje", new AuthorDTO(maria));
+		
+		CommentDTO commen1 = new CommentDTO("Boa viagem mano!", sdf.parse("21/03/2018"), new AuthorDTO(alex));
+		CommentDTO commen2 = new CommentDTO("Aproveite!", sdf.parse("22/03/2018"), new AuthorDTO(bob));
+		CommentDTO commen3 = new CommentDTO("Tenha um ótimo dia!", sdf.parse("23/03/2018"), new AuthorDTO(alex));
+		
+		p1.getComments().addAll(Arrays.asList(commen1, commen2));
+		p2.getComments().add(commen3);
 		
 		postRepository.saveAll(Arrays.asList(p1,p2));
 		
