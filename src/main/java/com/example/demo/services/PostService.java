@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,10 @@ public class PostService {
 	
 	public List<Post> findByTitle(String text){
 		return repository.findByTitle(text);
+	}
+	
+	public List<Post> findFull(String text, Date minDate, Date maxDate){
+		return repository.findFull(text, minDate, maxDate);
 	}
 	
 }
